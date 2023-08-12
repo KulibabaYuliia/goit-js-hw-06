@@ -4,7 +4,7 @@ function getRandomHexColor() {
     .padStart(6, 0)}`;
 }
 
-const amountEl = document.querySelector("#controls input");
+const inputEl = document.querySelector("#controls input");
 const createEl = document.querySelector("[data-create]");
 const destroyEl = document.querySelector("[data-destroy]");
 const boxesEl = document.querySelector("#boxes");
@@ -14,9 +14,9 @@ function createBoxes(amount) {
   let blockWidth = 30;
   let blockHeight = 30;
 
-  const inputMin = parseInt(amountEl.getAttribute("min"));
-  const inputMax = parseInt(amountEl.getAttribute("max"));
-  const inputStep = parseInt(amountEl.getAttribute("step"));
+  const inputMin = parseInt(inputEl.getAttribute("min"));
+  const inputMax = parseInt(inputEl.getAttribute("max"));
+  const inputStep = parseInt(inputEl.getAttribute("step"));
 
   if (amount < inputMin || amount > inputMax) {
     alert("Amout should be between 1 and 100");
@@ -32,11 +32,11 @@ function createBoxes(amount) {
 }
 
 createEl.addEventListener("click", () => {
-  const amount = amountEl.value;
+  const amount = inputEl.value;
   createBoxes(amount);
 });
 
 destroyEl.addEventListener("click", () => {
   boxesEl.innerHTML = "";
-  amountEl.value = "";
+  inputEl.value = "";
 });
