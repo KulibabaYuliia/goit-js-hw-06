@@ -9,29 +9,34 @@ const createEl = document.querySelector("[data-create]");
 const destroyEl = document.querySelector("[data-destroy]");
 const boxesEl = document.querySelector("#boxes");
 
-let amount = 0;
-amountEl.addEventListener("change", () => {
-  amount = amountEl.value;
-});
-
 function createBoxes(amount) {
   let text = "";
   let blockWidth = 30;
   let blockHeight = 30;
 
-  for (let i = 1; i <= amount; i += 1) {
-    console.log(amount);
-    text += `<div style="height:${blockHeight}px; width:${blockWidth}px; background:${getRandomHexColor()}"></div>`;
-    blockHeight += 10;
-    blockWidth += 10;
+  const inputMin = parseInt(amountEl.getAttribute("min"));
+  const inputMax = parseInt(amountEl.getAttribute("max"));
+  const inputStep = parseInt(amountEl.getAttribute("step"));
+
+  if (amount < inputMin || amount > inputMax) {
+    alert("Amout should be between 1 and 100");
+  } else {
+    for (let i = 0; i < amount; i += inputStep) {
+      console.log(amount);
+      text += `<div style="height:${blockHeight}px; width:${blockWidth}px; background:${getRandomHexColor()}"></div>`;
+      blockHeight += 10;
+      blockWidth += 10;
+    }
+    boxesEl.insertAdjacentHTML("beforeend", text);
   }
-  boxesEl.insertAdjacentHTML("afterbegin", text);
 }
 
 createEl.addEventListener("click", () => {
+  const amount = amountEl.value;
   createBoxes(amount);
 });
 
 destroyEl.addEventListener("click", () => {
   boxesEl.innerHTML = "";
+  amountEl.value = "";
 });

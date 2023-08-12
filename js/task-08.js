@@ -14,6 +14,8 @@ const submitHandler = (event) => {
     alert("All fileld should be filled");
   } else {
     console.log(info);
+    email.value = "";
+    password.value = "";
   }
 };
 
